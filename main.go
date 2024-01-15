@@ -12,6 +12,7 @@ import (
 func main() {
 	miso.SetDefProp(miso.PropAppName, "echo-server")
 	miso.SetDefProp(miso.PropServerPort, 80)
+	miso.ManualBootstrapPrometheus()
 
 	miso.RawAny("/*proxy", func(c *gin.Context, rail miso.Rail) {
 		rail.Infof("Receive '%v %v' request from %v", c.Request.Method, c.Request.RequestURI, c.Request.RemoteAddr)
