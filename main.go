@@ -9,15 +9,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func init() {
-	miso.SetDefProp(miso.PropAppName, "echo-server")
-}
-
 func main() {
-	miso.RawAny("/echo", func(c *gin.Context, rail miso.Rail) {
-		rail.Infof("Receive request from %v", c.Request.RemoteAddr)
-		rail.Infof("Method: %v, Content-Length: %v", c.Request.Method, c.Request.ContentLength)
+	miso.SetDefProp(miso.PropAppName, "echo-server")
+	miso.SetDefProp(miso.PropServerPort, 80)
 
+	miso.RawAny("/*proxy", func(c *gin.Context, rail miso.Rail) {
+		rail.Infof("Receive '%v %v' request from %v", c.Request.Method, c.Request.RequestURI, c.Request.RemoteAddr)
+		rail.Infof("Content-Length: %v", c.Request.ContentLength)
 		body, e := io.ReadAll(c.Request.Body)
 		if e != nil {
 			rail.Errorf("Failed to read request body, %v", e)
