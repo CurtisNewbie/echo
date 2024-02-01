@@ -32,7 +32,6 @@ func main() {
 		rail.Info("Body: ")
 		rail.Infof("  %s", string(body))
 		rail.Info("")
-		rail.Info("Requested processed\n")
 	})
 	miso.BootstrapServer(os.Args)
 }
