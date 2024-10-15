@@ -11,7 +11,7 @@ import (
 
 func main() {
 	miso.SetDefProp(miso.PropAppName, "echo-server")
-	miso.SetDefProp(miso.PropServerPort, 80)
+	miso.SetDefProp(miso.PropServerPort, 8080)
 	miso.ManualBootstrapPrometheus()
 
 	miso.RawAny("/*proxy", func(c *gin.Context, rail miso.Rail) {
